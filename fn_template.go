@@ -103,9 +103,9 @@ package glodash
 *     "main": ' + _.template(mainText).source + '\
 *   };\
 * ');
-*/
-func Template[T any](str string, options T, options any /*RegExp*/) func(T) bool {
-	var out func(T) bool
-	return out
+ */
+func Template[T any](str string) (func(T) (string, error), error) {
+	return func(t T) (string, error) {
+		return str, nil
+	}, nil
 }
-	

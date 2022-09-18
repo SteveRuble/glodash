@@ -1,5 +1,7 @@
 package glodash
 
+import "time"
+
 /**
 * Creates a debounced function that delays invoking `func` until after `wait`
 * milliseconds have elapsed since the last time the debounced function was
@@ -53,9 +55,16 @@ package glodash
 *
 * // Cancel the trailing debounced invocation.
 * jQuery(window).on('popstate', debounced.cancel);
-*/
-func Debounce[T any](fn func(T) bool, wait int, options T, options any /*boolean*/) func(T) bool {
-	var out func(T) bool
-	return out
+ */
+func Debounce[T any](fn func(T), options DebounceOptions) (debounced func(T), cancel func()) {
+	debounced = func(t T) {}
+	cancel = func() {}
+	return
 }
-	
+
+type DebounceOptions struct {
+	Leading  bool
+	Wait     time.Duration
+	MaxWait  time.Duration
+	Trailing bool
+}

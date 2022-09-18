@@ -36,9 +36,15 @@ package glodash
 *   'omission': ' [...]'
 * });
 * // => 'hi-diddly-ho there, neig [...]'
-*/
-func Truncate[T any](str string, options T, options int, options string, options any /*RegExp|string*/) string {
+ */
+func Truncate(str string, options TruncateOptions) string {
 	var out string
 	return out
 }
-	
+
+type TruncateOptions struct {
+	Length     int
+	Omission   string
+	Separator  string
+	NoOmission bool
+}

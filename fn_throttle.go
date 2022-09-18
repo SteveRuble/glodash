@@ -1,5 +1,7 @@
 package glodash
 
+import "time"
+
 /**
 * Creates a throttled function that only invokes `func` at most once per
 * every `wait` milliseconds. The throttled function comes with a `cancel`
@@ -43,9 +45,13 @@ package glodash
 *
 * // Cancel the trailing throttled invocation.
 * jQuery(window).on('popstate', throttled.cancel);
-*/
-func Throttle[T any](fn func(T) bool, wait int, options T, options any /*boolean*/) func(T) bool {
-	var out func(T) bool
-	return out
+ */
+func Throttle[T any](fn func(), options ThrottleOptions) func() {
+	return fn
 }
-	
+
+type ThrottleOptions struct {
+	Wait         time.Duration
+	SkipLeading  bool
+	SkipTrailing bool
+}
